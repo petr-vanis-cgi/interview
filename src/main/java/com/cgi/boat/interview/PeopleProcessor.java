@@ -1,5 +1,7 @@
 package com.cgi.boat.interview;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,13 +19,23 @@ class PeopleProcessor {
      *  "Peter" -> ["Doe"]
      * }
      */
-    static Map<String, List<String>> lastnamesByFirstname(List<Person> people){
-        //TODO: implement
+    static Map<String, List<String>> lastNamesByFirstName(List<Person> people){
+        Map<String, List<String>> resultMap = new HashMap<>();
+        people.forEach(personInput -> {
+            resultMap.put(personInput.getFirstName(), new ArrayList<>());
+            people.forEach(personCurrent -> {
+                if (personCurrent.getFirstName().equals(personInput.getFirstName())) {
+                    resultMap.get(personCurrent.getFirstName()).add(personCurrent.getLastName());
+                }
+            });
+        });
+
+        return resultMap;
     }
 
 
     /**
-     * Same as {@link PeopleProcessor#lastnamesByFirstname} except that the mapping
+     * Same as {@link PeopleProcessor#lastNamesByFirstName} except that the mapping
      * returned is lastname -> firstnames
      *
      * Example:
@@ -34,8 +46,18 @@ class PeopleProcessor {
      *  "Silver" -> ["John"]
      *
      */
-    static Map<String, List<String>> firstnamesByLastname(List<Person> people){
-        //TODO: implement
+    static Map<String, List<String>> firstNamesByLastName(List<Person> people){
+        Map<String, List<String>> resultMap = new HashMap<>();
+        people.forEach(personInput -> {
+            resultMap.put(personInput.getLastName(), new ArrayList<>());
+            people.forEach(personCurrent -> {
+                if (personCurrent.getLastName().equals(personInput.getLastName())) {
+                    resultMap.get(personCurrent.getLastName()).add(personCurrent.getFirstName());
+                }
+            });
+        });
+
+        return resultMap;
     }
 
 }

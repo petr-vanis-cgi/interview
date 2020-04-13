@@ -1,25 +1,25 @@
 package com.cgi.boat.interview;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
+    public static final int PRINTED_NAMES_COUNT = 3;
+
     public static void main(String[] args) {
-        Map<String, List<String>> firstByLast = PeopleProcessor.firstnamesByLastname(PeopleSetup.people);
-        Map<String, List<String>> lastByFirst = PeopleProcessor.lastnamesByFirstname(PeopleSetup.people);
+        Map<String, List<String>> firstByLast = PeopleProcessor.firstNamesByLastName(PeopleSetup.people);
+        Map<String, List<String>> lastByFirst = PeopleProcessor.lastNamesByFirstName(PeopleSetup.people);
 
-        // TODO: Print out 3 most common first names along with number of occurrences
-        // for example:
-        // Homer: 32
-        // Bart: 21
-        // William: 3
+        lastByFirst.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().size())
+                ).entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(PRINTED_NAMES_COUNT)
+                .forEach(System.out::println);
     }
-
-
-
-
-
-
-
 }
