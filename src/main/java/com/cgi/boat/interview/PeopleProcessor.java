@@ -1,9 +1,6 @@
 package com.cgi.boat.interview;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 class PeopleProcessor {
     /**
@@ -22,12 +19,11 @@ class PeopleProcessor {
     static Map<String, List<String>> lastNamesByFirstName(List<Person> people){
         Map<String, List<String>> resultMap = new HashMap<>();
         people.forEach(personInput -> {
-            resultMap.put(personInput.getFirstName(), new ArrayList<>());
-            people.forEach(personCurrent -> {
-                if (personCurrent.getFirstName().equals(personInput.getFirstName())) {
-                    resultMap.get(personCurrent.getFirstName()).add(personCurrent.getLastName());
-                }
-            });
+            if (resultMap.entrySet().stream().noneMatch(entry -> entry.getKey().equals(personInput.getFirstName()))) {
+                resultMap.put(personInput.getFirstName(), new ArrayList<>(Collections.singletonList(personInput.getLastName())));
+            } else {
+                resultMap.get(personInput.getFirstName()).add(personInput.getLastName());
+            }
         });
 
         return resultMap;
@@ -49,12 +45,11 @@ class PeopleProcessor {
     static Map<String, List<String>> firstNamesByLastName(List<Person> people){
         Map<String, List<String>> resultMap = new HashMap<>();
         people.forEach(personInput -> {
-            resultMap.put(personInput.getLastName(), new ArrayList<>());
-            people.forEach(personCurrent -> {
-                if (personCurrent.getLastName().equals(personInput.getLastName())) {
-                    resultMap.get(personCurrent.getLastName()).add(personCurrent.getFirstName());
-                }
-            });
+            if (resultMap.entrySet().stream().noneMatch(entry -> entry.getKey().equals(personInput.getLastName()))) {
+                resultMap.put(personInput.getLastName(), new ArrayList<>(Collections.singletonList(personInput.getFirstName())));
+            } else {
+                resultMap.get(personInput.getLastName()).add(personInput.getFirstName());
+            }
         });
 
         return resultMap;
