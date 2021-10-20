@@ -2,6 +2,7 @@ package com.cgi.boat.interview;
 
 class Person {
 
+
     private final String firstName;
     private final String lastName;
 
@@ -11,10 +12,14 @@ class Person {
     }
 
     String getFirstName() {
+
         return firstName;
     }
 
     String getLastName() {
         return lastName;
     }
+
 }
+
+
