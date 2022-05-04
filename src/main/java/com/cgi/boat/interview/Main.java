@@ -9,11 +9,11 @@ import java.util.Map;
 public class Main {
 
 	public static void main(String[] args) {
-		Map<String, List<String>> lastByFirst = PeopleProcessor.lastnamesByFirstname(PeopleSetup.people);
-		System.out.println(lastByFirst);
-
 		Map<String, List<String>> firstByLast = PeopleProcessor.firstnamesByLastname(PeopleSetup.people);
 		System.out.println(firstByLast);
+
+		Map<String, List<String>> lastByFirst = PeopleProcessor.lastnamesByFirstname(PeopleSetup.people);
+		System.out.println(lastByFirst);
 
 		// TODO: Print out 3 most common first names along with number of occurrences
 		// for example:
@@ -22,8 +22,10 @@ public class Main {
 		// William: 3
 
 		List<String> result = compare(PeopleSetup.people);
-		System.out.println("\nMost common names: " + result);
-
+		System.out.println("\nMost common names: ");
+		for (String s : result) {
+			System.out.println(s);
+		}
 	}
 
 	static List<String> compare(List<Person> people) { // Method for 3 most common names
@@ -33,24 +35,22 @@ public class Main {
 
 			if (!count.containsKey(temp.getFirstName())) {
 				count.put(temp.getFirstName(), 1);
-			}
-
-			else {
+			} else {
 				int value = count.get(temp.getFirstName());
 				value++;
-
 				count.put(temp.getFirstName(), value);
 			}
 		}
 
 		List<String> mostCommons = new ArrayList<>();
 
-		for (int i = 0; i <= 2; i++) { // 3 times because we need 3 most common names
+		for (int i = 0; i <= 2; i++) { // 3 times because we need 3 most common names //THIS AFFECTS THE NUMBER OF
+										// COMMON NAMES (i <= 2)
 			for (Map.Entry<String, Integer> e : count.entrySet()) {
 
-				if (e.getValue() == Collections.max(count.values()) && i < 3) {
+				if (e.getValue() == Collections.max(count.values())) {
 
-					mostCommons.add(e.getKey() + " " + e.getValue());
+					mostCommons.add(e.getKey() + ": " + e.getValue());
 					count.computeIfPresent(e.getKey(), (k, v) -> v - e.getValue()); // changing the max value to zero so
 																					// it can't be found and added again
 					break; // break the for loop to start again to find the second and 3rd most common name
@@ -59,5 +59,4 @@ public class Main {
 		}
 		return mostCommons;
 	}
-
 }
