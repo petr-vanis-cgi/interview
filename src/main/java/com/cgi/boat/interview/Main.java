@@ -23,6 +23,8 @@ public class Main {
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
                 .limit(3)
                 .collect(Collectors.toMap(x -> x.getKey(), x->x.getValue()));
+        top3FirstNamesWithCount.entrySet().stream()
+                .forEach(System.out::println);
     }
 
 

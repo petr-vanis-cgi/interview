@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-class PeopleProcessor {
+public class PeopleProcessor {
     /**
      * Returns a {@link Map} where keys are first names and values lists of all last names
      * of people from the input list who have the first name
@@ -19,7 +19,7 @@ class PeopleProcessor {
      *  "Peter" -> ["Doe"]
      * }
      */
-    static Map<String, List<String>> lastnamesByFirstname(List<Person> people){
+    public static Map<String, List<String>> lastnamesByFirstname(List<Person> people){
         Map<String, List<String>> mapOfLastNamesByFirstName = new HashMap<>();
         for(Person person : people) {
             List<String> lastNamesWithRelatesFirstNames = people.stream()
@@ -44,7 +44,7 @@ class PeopleProcessor {
      *  "Silver" -> ["John"]
      *
      */
-    static Map<String, List<String>> firstnamesByLastname(List<Person> people){
+    public static Map<String, List<String>> firstnamesByLastname(List<Person> people){
         Map<String, List<String>> mapOfFirstNamesByLastName = new HashMap<>();
         for(Person person : people) {
             List<String> firstNamesWithRelatesLastNames = people.stream()
