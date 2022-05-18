@@ -4,8 +4,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 class PeopleSetup {
-    final static List<Person> people = Collections.unmodifiableList(Arrays.asList(
+
+    private PeopleSetup() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    static final List<Person> people = Collections.unmodifiableList(Arrays.asList(
             new Person("Antonio","Aakeel"),
             new Person("Khalid","Abdalla"),
             new Person("John","Acheson"),
